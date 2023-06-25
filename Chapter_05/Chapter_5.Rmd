@@ -1,0 +1,212 @@
+---
+title: "Chapter 5"
+output: html_document
+date: '2023-06-24'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##1
+The following objects are defined:
+```{r}
+num_vec <- seq(-4, 4, length = 20)
+log_matrix <- matrix(data = c(F,T,T,T,F,T,T,F,F), nrow = 3, ncol = 3)
+char_vec <- c("don","quixote")
+factor_vec <- factor(x = c("LOW","MED","LOW","MED","MED","HIGH"))
+```
+Create a list called 'Alist' with the objects:
+```{r}
+Alist <- list(num_vec, log_matrix, char_vec, factor_vec)
+```
+
+##2
+With the following list "Alist" defined. 
+```{r}
+Alist
+```
+Extract the values from columns 2 and 3 from row 2 of the logical matrix.
+```{r}
+Alist[[2]][2,c(2,3)]
+```
+
+##3
+
+With the list Alist defined. 
+
+```{r}
+Alist
+```
+
+
+Update the authors name to "Don Quixote".
+
+```{r}
+Alist[[3]] <- sub(pattern = "don", replacement = "Don", x = Alist[[3]])
+Alist[[3]] <- sub(pattern = "quixote", replacement = "Quixote", x = Alist[[3]])
+```
+
+##4
+
+With the list Alist; 
+
+```{r}
+Alist
+```
+
+show all the values from the numeric vector with values greater than 1.
+```{r}
+Alist[[1]][Alist[[1]] > 1]
+```
+
+##5
+With the list Alist
+
+```{r}
+Alist
+```
+
+Print the members of the factor vector that have value "MED".
+```{r}
+which(Alist[[4]] == "MED")
+```
+##6
+
+With the list 'Alist' defined:
+
+```{r}
+Alist
+```
+
+Create a new list called 'newlist' that contains a named component "facs" that has the logical factor vector from 'Alist', a named component "nums" with the vector (3, 2.1, 3.3, 4, 1.5, 4.9), and a named component "oldlist" that has the first 3 elements from the 'Alist'
+
+```{r}
+newlist <- list(facs = Alist[[4]], nums = c(3, 2.1, 3.3, 4, 1.5, 4.9), oldlist = Alist[1:3])
+newlist
+```
+## 7
+
+With newlist defined:
+
+```{r}
+newlist
+```
+
+Print the elements of the 'facs' component corresponding to the positions where the 'nums' component is greater than or equal to 3:
+```{r}
+newlist$facs[newlist$nums >= 3]
+```
+
+## 8
+
+With the list 'newlist' defined:
+
+```{r}
+newlist
+```
+Create a new named component 'flags' which is a logical vector of length 6, obtained as a twofold repetition of the third column of the logical matrix in the "oldlist" component.
+```{r}
+newlist$flags <- rep(newlist$oldlist[[2]][,3], 2)
+```
+
+##9
+
+With the list 'newlist' defined:
+
+```{r}
+newlist
+```
+Use the component "flags" and the logical negation operator ! to extract the entries of "num" corresponding to FALSE.
+```{r}
+newlist$nums[!newlist$flags]
+```
+
+##10
+
+With the list 'newlist' defined:
+
+```{r}
+newlist
+```
+Overwrite the character string vector component of "oldlist" with the single character string "Don Quixote"
+```{r}
+newlist$oldlist[[3]] <- "Don Quixote"
+newlist
+```
+
+## 11
+Create the following dataframe called "dframe". Make certain to define the levels of the factors in the appropriate way: M/F, Low/Med/High.
+
+```{r}
+dframe <- data.frame(person = c("Stan","Francine","Steve","Roger","Hayley","Klaus"), 
+                     sex = factor(x = c("M","F","M","M","F","M"), levels = c("M","F")), 
+                     funny = factor(x = c("High","Med","Low","High","Med","Med"), levels = c("Low","Med","High")),
+                     stringsAsFactors = FALSE)
+```
+
+```{r}
+dframe
+```
+
+##12
+
+Add to the dframe object a new column 'Age' where Stan and Francine are both 41, Steve is 15, Hayley is 21, Klaus is 60 and Roger is 1600
+
+```{r}
+dframe$age <- c(41, 41, 15, 1600, 21, 60)
+```
+
+##13
+Reorder the dataframe 'dframe' by placing the columns in the order: Person, Age, Sex and funny
+
+```{r}
+dframe <- dframe[,c(1, 4, 2, 3)]
+dframe
+```
+
+
+## 12
+We have two dataframes. The dataframe called "dframe"
+
+```{r}
+dframe
+```
+and a small one called "temp"
+```{r}
+temp <- data.frame(person = "Samantha", age = 30, sex = factor("F"), funny = factor("High"), stringsAsFactors = FALSE)
+temp
+```
+
+Create a new dataframe called "mydframe" that has the "temp" dataframe appended onto the end of the "dframe"
+
+```{r}
+mydframe <- rbind(dframe, temp)
+```
+
+## 13
+
+With the following dataframe "mydframe"
+
+```{r}
+mydframe
+```
+
+
+Select only the person and age fields for Females who have a Medium or High level of funny.
+```{r}
+mydframe[mydframe$sex == "F" & ( mydframe$funny == "Med" | mydframe$funny == "High"),c("person","age")]
+```
+##14 
+With the dataframe "mydframe" 
+
+```{r}
+mydframe
+```
+
+
+select only the records for individuals whose name starts with s
+```{r}
+mydframe[substr(mydframe$person, start = 1, stop = 1) == "S",]
+```
+

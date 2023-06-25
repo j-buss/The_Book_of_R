@@ -1,0 +1,111 @@
+---
+title: "Chapter 2"
+output: html_document
+date: '2023-06-20'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## 2.1 R for Basic Math
+
+### 2.1.1 Arithmetic
+
+
+
+### 2.1.2 Logarithms and Exponentials
+Find the base 3 logarithm of 243:
+```{r}
+log(x = 243, base = 3)
+```
+
+Find the value of \(e^3\):
+```{r}
+exp(x = 3)
+```
+
+Find the natural log of 20.08554:
+```{r}
+log(x = 20.08554)
+```
+
+### 2.1.3 E-Notation
+
+## Exercise 2.1
+Calculate the square root of half of the average of the numbers: 25.2, 15, 16.44, 15.3, 18.6
+```{r}
+vec <- c(25.2, 15, 16.44, 15.3, 18.6)
+```
+
+
+
+```{r}
+sqrt(mean(c(25.2, 15, 16.44, 15.3, 18.6)) / 2)
+```
+
+Find the \(log_e(0.3)\)
+```{r}
+log(x = 0.3, base = exp(1))
+```
+
+
+Type the exponential notation of the number: -0.0005
+```{r}
+-5e-4
+```
+
+Type the command to create the following output:
+```{r}
+rep(x = c(3, 62, 8.3), times = 3, each = 2)
+```
+
+Create 'my_seq' and store a sequence of values from 5 to -11 that progresses in steps of 0.3
+
+```{r}
+my_seq <- seq(from = 5, to = -11, by = -0.3)
+```
+
+Create 'my_seq' and store a sequence of values from 5 to -11 that progresses in steps of 0.3, but have it in reverse order
+
+```{r}
+(my_seq <- sort(x = seq(from = 5, to = -11, by = -0.3)))
+```
+
+Create 'Z' as the repeat of the vector c(-1, 3, -5, 7, -9) twice, with each element repeated 10 times:
+```{r}
+Z <- rep(c(-1, 3, -5, 7, 9), times = 2, each = 10)
+```
+
+Display the vector 'Z' from largest to smallest.
+```{r}
+sort(Z, decreasing = TRUE)
+```
+
+
+Create a vector which has the following items in order:
+
+- Sequence of integers from 6 to 12
+- A threefold repetition of the value 5.3
+- The number -3
+- A sequence of nine values starting at 102, decreasing by 1/3
+```{r}
+c(seq(6, 12),rep(5.3, times = 3), -3, seq(102, by = -1/3, length = 9))
+```
+
+The 'my_vec' vector is defined as (2, 0.5, 1, 2, 0.5, 1, 2, 0.5, 1). Convert it to a vector of only 1s, using a vector of length 3.
+```{r}
+my_vec <- c(2, 0.5, 1, 2, 0.5, 1, 2, 0.5, 1)
+my_vec / c(2, 0.5, 1)
+```
+
+
+Use the vector c(2, 4, 6) and the vector c(1, 2) in conjunction with 'rep' and * to produce the vector c(2, 4, 6, 4, 8, 12)
+```{r}
+rep(c(1,2), times = 1, each = 3) * c(2, 4, 6)
+```
+
+The vector 'v' is defined as (2, 4, 6, 4, 8, 12). Overwrite the middle 4 values of v with the values -0.1 and -100 recycled 2x in that order.
+```{r}
+v[2:5] <- rep(c(-0.1, -100), each = 2)
+```
+

@@ -1,0 +1,252 @@
+---
+title: "Chapter 3"
+output: html_document
+date: '2023-06-20'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## 1
+
+What is the default argument for the "matrix" function which identifies the way in which it is loaded during definition?
+byrow = FALSE
+
+## 2
+Fill a 2x3 matrix in column-wise fashion with vector 1, 2, 3, ..., 6 using all named attributes 
+
+[for display only...no need to assign a variable]
+
+```{r}
+matrix(data = 1:6, nrow = 2, ncol = 3, byrow = FALSE)
+```
+
+##3
+
+Create the following matrix using 2 vectors: 1:3 and 4:6
+
+\[
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{bmatrix}
+\]
+
+
+
+```{r}
+rbind(1:3, 4:6)
+```
+
+##4
+
+Create the following matrix using the 3 vectors: 1:2, 3:4, and 5:6
+
+\[
+\begin{bmatrix}
+1 & 3 & 5 \\
+2 & 4 & 6 \\
+\end{bmatrix}
+\]
+
+
+[for display only...no need to assign a variable]
+```{r}
+cbind(1:2, 3:4, 5:6)
+```
+
+##5
+The matrix A is defined as below. Type the command to extract the value 105.5
+
+\[
+A= \begin{bmatrix}
+0.3 & 91.0 & -4.2 \\
+4.5 & 0.1 & 8.2 \\
+55.3 & 105.5 & 27.9
+\end{bmatrix}
+\]
+
+```{r}
+A <- matrix(c(0.3, 4.5, 55.3, 91, 0.1, 105.5, -4.2, 8.2, 27.9), nrow = 3, ncol = 3)
+A
+```
+```{r}
+A[3,2]
+```
+
+##6
+Extract the first row from A
+
+\[
+A= \begin{bmatrix}
+0.3 & 91.0 & -4.2 \\
+4.5 & 0.1 & 8.2 \\
+55.3 & 105.5 & 27.9
+\end{bmatrix}
+\]
+```{r}
+A[1,]
+```
+
+##7
+Select the 3rd column and 1st column of A (in that order)
+\[
+A= \begin{bmatrix}
+0.3 & 91.0 & -4.2 \\
+4.5 & 0.1 & 8.2 \\
+55.3 & 105.5 & 27.9
+\end{bmatrix}
+\]
+```{r}
+A[,c(3,1)]
+```
+
+##8
+Extract the diagonal of A
+
+\[
+A= \begin{bmatrix}
+0.3 & 91.0 & -4.2 \\
+4.5 & 0.1 & 8.2 \\
+55.3 & 105.5 & 27.9
+\end{bmatrix}
+\]
+
+```{r}
+diag(x = A)
+```
+
+##9
+Construct the 4x2 matrix "B" in row-wise fashion with the values: 4.3, 3.1, 8.2, 8.2, 3.2, 0.9, 1.6, 6.5 
+
+[name ALL arguments]
+
+\[
+B= \begin{bmatrix}
+4.3 & 3.1 \\
+8.2 & 8.2 \\
+3.2 & 0.9\\
+1.6 & 6.5
+\end{bmatrix}
+\]
+
+```{r}
+B <- matrix(data = c(4.3, 3.1, 8.2, 8.2, 3.2, 0.9, 1.6, 6.5), nrow = 4, ncol = 2, byrow = TRUE)
+```
+
+##10
+The matrix "B" is a 4x2 matrix. Show the dimensions of the matrix B after removing the first row. [Use a function]
+
+\[
+B= \begin{bmatrix}
+4.3 & 3.1 \\
+8.2 & 8.2 \\
+3.2 & 0.9\\
+1.6 & 6.5
+\end{bmatrix}
+\]
+```{r}
+dim(B[-1,])
+```
+
+##11
+The matrix "B" is a 4x2 matrix. Overwrite the 2nd column of B with the same column, but sorted from smallest to largest
+
+\[
+B= \begin{bmatrix}
+4.3 & 3.1 \\
+8.2 & 8.2 \\
+3.2 & 0.9\\
+1.6 & 6.5
+\end{bmatrix}
+\Longrightarrow
+\begin{bmatrix}
+4.3 & 0.9 \\
+8.2 & 3.1 \\
+3.2 & 6.5\\
+1.6 & 8.2
+\end{bmatrix}
+\]
+```{r}
+B[,2] <- sort(x = B[,2], decreasing = FALSE)
+B
+```
+##12
+
+The following 2 matrices are defined:
+
+\[
+  A = 
+\begin{bmatrix}
+1 \\
+2 \\
+7
+\end{bmatrix}\;\;
+B = 
+\begin{bmatrix}
+3 \\
+4 \\
+8
+\end{bmatrix}
+\]
+
+Type the command to execute the following:
+
+\(A^{\intercal} \cdot B\)
+
+```{r}
+A <- matrix(c(1, 2, 7))
+B <- matrix(c(3, 4, 8))
+t(A) %*% B
+```
+
+##13
+If the following matrix A is defined. Type the command to execute the following: \(A^{-1} \cdot A - I_4\) thus confirming the answer is a 4x4 matrix of all 0s.
+
+\[
+A = 
+\begin{bmatrix}
+2 & 0 & 0 & 0 \\
+0 & 3 & 0 & 0 \\
+0 & 0 & 5 & 0 \\
+0 & 0 & 0 & -1
+\end{bmatrix}
+\]
+
+```{r}
+A <- diag(x = c(2, 3, 5, -1))
+solve(A) %*% A - diag(nrow = 4)
+```
+
+##14
+Create a 3-D array (call it DRay) with six layers of a 4X2 matrix, filled with a decreasing sequence of values between 4.8 and 0.1 of the appropriate length. [Name all arguments]
+
+```{r}
+DRay <- array(data = seq(from = 4.8, to = 0.1, length = 48), dim = c(4, 2, 6))
+```
+##15
+There is a 3-D array called DRay with six layers of a 4X2 matrix. Extract 4th and 1st-row elements, in that order, of the second column only of all layers and store as 'sDRay'.
+```{r}
+sDRay <- DRay[c(4,1),2,]
+```
+
+##16
+We have a 2x6 matrix defined named 'sDRay' (from previous exercises). Use a fourfold repetition of the second row to fill a new array of dimensions 2x2x2x3.
+
+```{r}
+array(data = rep(sDRay[2,], 4), dim = c(2, 2, 2, 3))
+```
+
+##17
+Create a new array called 'fiveLayer' comprised of the results of deleting the sixth layer of the 4x2x6 array called 'DRay'
+
+```{r}
+fiveLayer <- DRay[,,-6]
+```
+
+##18
+There is a 4x2x5 dimension array named 'fiveLayer'. Overwrite the second and fourth row elements of the second column of layers 1, 3, and 5 with -99.
+```{r}
+fiveLayer[c(2,4),2,c(1, 3, 5)] <- -99
+```
+

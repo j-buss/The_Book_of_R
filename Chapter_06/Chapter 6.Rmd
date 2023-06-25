@@ -1,0 +1,235 @@
+---
+title: "Chapter 6"
+output: html_document
+date: '2023-06-25'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# 6.1
+##1
+
+
+With the following vector defined: foo <-c(13563, -14156, -14319, 16981, 12921, 11979, 9568, 8833, -12968, 8133)
+
+Output the elements, that when foo is raised to the power 75, are NOT infinite.
+```{r}
+foo <-c(13563, -14156, -14319, 16981, 12921, 11979, 9568, 8833, -12968, 8133)
+foo[is.finite(foo^75)]
+```
+
+##2
+
+With the following vector defined: foo <-c(13563, -14156, -14319, 16981, 12921, 11979, 9568, 8833, -12968, 8133)
+
+Output all the elements from foo, except those that result in negative infinity when raised to a power of 75
+
+```{r}
+foo[!(is.infinite(foo^75)&foo^75<0)]
+```
+
+
+##3
+
+With the following matrix defined "bar":
+
+
+```{r}
+bar <- matrix(
+    c(77875.40,-35466.25,-39803.81, 27551.45, -73333.85, 55976.34, 
+      23764.30, 36599.69, 76694.82, -36478.88, -70585.69, 47032.00),
+    nrow = 3, 
+    ncol = 4
+)
+bar
+```
+
+Identify the coordinate-specific indexes of the entries of "bar" that are NaN when you raise "bar" to the power of 65 and divide by infinity.
+```{r}
+which(is.nan(bar^65 / Inf), arr.ind = TRUE)
+```
+
+##4
+
+With the following matrix defined "bar":
+
+```{r}
+bar
+```
+
+Return the values in "bar" that are NOT NaN when "bar" is raised to a power of 67 and infinity is added to the result.
+```{r}
+!is.nan(bar^67 + Inf)
+```
+
+##5
+
+With the following matrix defined "bar":
+
+```{r}
+bar
+```
+
+Identify those values in "bar" that are either negative infinity OR finite when you raise "bar" to a power of 67
+
+```{r}
+bar[(is.infinite(bar^67) & bar^67 < 0) | is.finite(bar^67)]
+```
+
+# 6.2
+
+## 6
+With the following vector defined. What is its length?
+
+foo <- c(4.3, 2.2, NULL, 2.4, NaN, 3.3, 3.1, NULL, 3.4, NA)
+```{r}
+foo <- c(4.3, 2.2, NULL, 2.4, NaN, 3.3, 3.1, NULL, 3.4, NA)
+length(foo)
+```
+
+## 7
+With the following vector defined. 
+
+foo <- c(4.3, 2.2, NULL, 2.4, NaN, 3.3, 3.1, NULL, 3.4, NA)
+
+What will the following return?
+```{r}
+which(x = is.na(x = foo))
+```
+
+##8
+
+With the following vector defined. 
+
+foo <- c(4.3, 2.2, NULL, 2.4, NaN, 3.3, 3.1, NULL, 3.4, NA)
+
+What will the following return?
+```{r}
+is.null(x = foo)
+```
+
+##9
+
+With the following vector defined. 
+
+foo <- c(4.3, 2.2, NULL, 2.4, NaN, 3.3, 3.1, NULL, 3.4, NA)
+
+What will the following return?
+```{r}
+is.na(x = foo[8])+ 4 / NULL
+```
+
+##10
+
+With the following list defined: Alist <- list(c(7, 7, NA, 3, NA, 1, 1, 5, NA))
+
+Name the first element of the list "alpha"
+```{r}
+Alist <- list(c(7, 7, NA, 3, NA, 1, 1, 5, NA))
+names(Alist) <- c("alpha")
+```
+
+##11
+
+With the following list defined:
+
+```{r}
+Alist
+```
+
+
+Confirm that there is no item in the list named "beta"
+```{r}
+any(names(Alist) == "beta")
+```
+
+##12
+
+With the following list defined:
+
+```{r}
+Alist
+```
+
+Create another member of the list named "beta". This new member should have all the positions of NAs from the "alpha" members.
+```{r}
+Alist$beta <- which(is.na(Alist$alpha))
+```
+
+#6.3
+
+##13
+
+```{r}
+foo <- array(data = 1:36, dim = c(3, 3, 4))
+class(foo)
+bar <- as.vector(foo)
+class(bar)
+baz <- as.character(bar)
+class(baz)
+qux <- as.factor(baz)
+class(qux)
+quux <- bar + c(-0.1, 0.1)
+class(quux)
+```
+
+
+## 14
+
+What are three ways to get the dimensions of the matrix "Neo" defined as:
+
+```{r}
+Neo <- matrix(data = 1:36, nrow = 4, ncol = 9, byrow = TRUE)
+dim(Neo)
+attr(x = Neo, which = "dim")
+attributes(Neo)$dim
+```
+
+## 15
+
+With the matrix "Trinity" defined:
+```{r}
+Trinity <- matrix(data = 2:13, nrow = 3, ncol = 4)
+Trinity
+```
+
+convert the contents into:
+
+```{r}
+as.character(Trinity)
+```
+
+## 16
+With the following matrix "mat" defined:
+```{r}
+mat <- matrix(c(34, 23, 33, 42, 41, 0, 1, 1, 0, 0, 1, 2, 1, 1, 2), nrow = 5, ncol = 3)
+mat
+```
+
+Coerce the matrix into a dataframe named "df":
+```{r}
+df <- data.frame(mat)
+```
+
+## 16
+With the following dataframe "df" defined:
+```{r}
+df
+```
+Coerce the second column as logical:
+```{r}
+df[,2] <- as.logical(df[,2])
+```
+
+## 17
+With the following dataframe "df" defined:
+```{r}
+df
+```
+
+Coerce the 3rd column as factor
+```{r}
+df[,3] <- as.factor(df[,3])
+```
+
